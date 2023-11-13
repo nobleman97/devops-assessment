@@ -1,6 +1,6 @@
 # Application
 
-All files you need - are in this GitHub repository. Just clone it from [GitHub][github-repository].
+All files you need - are in this GitHub repository. Just clone it.
 
 This app was written in Python, and it is pretty simple. 
 Why Python? In my own opinion, this is one of the languages that any Linux engineer should know. 
