@@ -1,9 +1,5 @@
 # Application
 
-How it should look: [Running Demo][demo].
-
-![Preview](static/preview.png)
-
 All files you need - are in this GitHub repository. Just clone it from [GitHub][github-repository].
 
 This app was written in Python, and it is pretty simple. 
