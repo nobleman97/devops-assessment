@@ -1,18 +1,3 @@
-# Introduction
-
-Looking for an experienced DevOps System Engineer is a challenging task, 
-because it is usually difficult to estimate all aspects of a person's knowledge.
-
-Technical interviews can reveal some strong and weak sides of a candidate, 
-but sometimes they leave some open questions about real experience.
-And if we are talking about real routine tasks - it's not only about knowledge,
-but also about skills to perform different kinds of tasks using manuals, docs, and even Google.
-
-So, the main goal of this test task - is to find out how a candidate can perform typical DevOps engineer tasks,
-adopting fresh-written applications to run in infrastructure and to be deployed as a production environment.
-
-Also, this task shouldn't take more than ~4 hours.
-
 # Application
 
 How it should look: [Running Demo][demo].
