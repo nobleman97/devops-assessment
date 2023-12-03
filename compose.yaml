@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: "postgres"
+    environment:
+      - POSTGRES_PASSWORD=davidson
+
+    networks:
+      - lab
+
+  app:
+    build: .
+    ports:
+      - "5000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:davidson@postgres:5432/postgres
+    networks:
+      - lab
+    
+
+networks:
+  lab:
+

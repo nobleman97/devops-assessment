@@ -11,7 +11,7 @@ ENV APP_VERSION=1.0.0
 ENV APP_NAME=AssessmentApp
 ENV USER_NAME=David_Nobleman
 ENV USER_URL=https://github.com/nobleman97
-ENV DATABASE_URL="${DATABASE_URL}"
+# ENV DATABASE_URL=postgresql://postgres:davidson@postgres:5430/postgres
 ENV FLASK_RUN_PORT=8000
 
 # RUN pip install --no-cache-dir -r requirements.txt
