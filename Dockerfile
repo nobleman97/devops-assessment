@@ -14,7 +14,7 @@ ENV USER_URL=https://github.com/nobleman97
 ENV FLASK_RUN_PORT=8000
 
 # ----- Remove next line when using Compose.yaml   ---------
-ENV DATABASE_URL="${DATABASE_URL}"  
+# ENV DATABASE_URL="${DATABASE_URL}"  
 
 RUN pip install --no-cache-dir -r requirements.txt
 # RUN pip install -r requirements.txt
