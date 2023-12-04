@@ -11,11 +11,13 @@ ENV APP_VERSION=1.0.0
 ENV APP_NAME=AssessmentApp
 ENV USER_NAME=David_Nobleman
 ENV USER_URL=https://github.com/nobleman97
-# ENV DATABASE_URL=postgresql://postgres:davidson@postgres:5430/postgres
 ENV FLASK_RUN_PORT=8000
 
-# RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install -r requirements.txt
+# ----- Remove next line when using Compose.yaml   ---------
+ENV DATABASE_URL="${DATABASE_URL}"  
+
+RUN pip install --no-cache-dir -r requirements.txt
+# RUN pip install -r requirements.txt
 
 RUN pip install --upgrade Flask-SQLAlchemy SQLAlchemy
 
