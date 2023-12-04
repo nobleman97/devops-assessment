@@ -5,7 +5,7 @@ on:
       - submission
 
 jobs:
-  create the docker image:
+  containerize:
     runs-on: ubuntu-latest
 
     steps:
