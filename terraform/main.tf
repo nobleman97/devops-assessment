@@ -53,13 +53,15 @@ resource "azurerm_network_interface" "postgres" {
   ip_configuration {
     name                          = "internal"
     subnet_id                     = module.network.priv-subnets["${local.subnets.db}"]
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
+    private_ip_address = "10.0.2.4"
   }
 
   ip_configuration {
     name                          = "public"
     subnet_id                     = module.network.priv-subnets["${local.subnets.db}"]
     private_ip_address_allocation = "Dynamic"
+    private_ip_address            = "10.0.2.5" 
     public_ip_address_id          = azurerm_public_ip.this.id
     primary                       = true
   }
@@ -67,20 +69,20 @@ resource "azurerm_network_interface" "postgres" {
 }
 
 
-resource "azurerm_network_interface" "private" {
-  name                = "private-nic"
-  location            = var.location
-  resource_group_name = data.azurerm_resource_group.this.name
+# resource "azurerm_network_interface" "private" {
+#   name                = "private-nic"
+#   location            = var.location
+#   resource_group_name = data.azurerm_resource_group.this.name
 
-  ip_configuration {
-    name                          = "internal"
-    subnet_id                     = module.network.priv-subnets["${local.subnets.db}"]
-    private_ip_address_allocation = "Static"
-    private_ip_address            = "10.0.2.4"
-    primary = false
-  }
+#   ip_configuration {
+#     name                          = "internal"
+#     subnet_id                     = module.network.priv-subnets["${local.subnets.db}"]
+#     private_ip_address_allocation = "Static"
+#     private_ip_address            = "10.0.2.4"
+#     primary = false
+#   }
 
-}
+# }
 
 
 
