@@ -137,4 +137,6 @@ dmypy.json
 *terraform.tfstate.backup
 
 */terraform/plan
-*/terraform/*.tfvars
+*.tfvars
+
+/ansible/vars/*
