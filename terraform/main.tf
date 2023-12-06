@@ -33,6 +33,9 @@ module "app-vm" {
       }
     }
   }
+
+  pub-key = var.vm-pub-key
+  
 }
 
 
