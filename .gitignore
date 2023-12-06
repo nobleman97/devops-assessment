@@ -140,3 +140,4 @@ dmypy.json
 *.tfvars
 
 /ansible/vars/*
+credentials.json
