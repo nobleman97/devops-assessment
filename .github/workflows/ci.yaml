@@ -27,13 +27,13 @@ jobs:
           docker tag 4568910/devops-assessment:latest 4568910/devops-assessment:latest-2
 
           docker pull 4568910/devops-assessment:latest
-          docker tag 4568910/devops-assessment:latest 4568910/devops-assessment:"v${GITHUB_RUN_NUMBER - 1}"
+          docker tag 4568910/devops-assessment:latest 4568910/devops-assessment:"v${GITHUB_RUN_NUMBER}"
           
           docker tag 4568910/devops-assessment:latest-2 4568910/devops-assessment:latest
 
       - name: Push Docker image
         run: |
-          docker push 4568910/devops-assessment:"v${GITHUB_RUN_NUMBER - 1}"
+          docker push 4568910/devops-assessment:"v${GITHUB_RUN_NUMBER}"
           docker push 4568910/devops-assessment:latest
 
       
