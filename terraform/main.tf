@@ -69,7 +69,7 @@ resource "azurerm_network_interface" "public" {
 
   ip_configuration {
     name                          = "public"
-    subnet_id                     = module.network.priv-subnets["${local.subnets.app}"]
+    subnet_id                     = module.network.pub-subnets["${local.subnets.app}"]
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.this.id
     primary                       = true
