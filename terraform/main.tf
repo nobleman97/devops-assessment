@@ -29,7 +29,7 @@ module "app-vm" {
 
 
 resource "azurerm_public_ip" "this" {
-  name                = "db-public-ip"
+  name                = "app-public-ip"
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location
   allocation_method   = "Dynamic"
