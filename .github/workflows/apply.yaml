@@ -73,9 +73,9 @@ jobs:
 
       - name: Terraform Apply
         run: |
-          terraform apply -var "connection_string=${{ secrets.DATABASE_URL }}" \
+          terraform apply --auto-approve -var "connection_string=${{ secrets.DATABASE_URL }}" \
           -var "docker_registry_password=${{ secrets.DOCKER_PASSWORD }}" \
-          -var "vm-pub-key=${{ secrets.VM_PUB_KEY }}"
+          -var "vm-pub-key=${{ secrets.VM_PUB_KEY }}" 
 
         
 
