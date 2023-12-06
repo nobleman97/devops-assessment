@@ -19,7 +19,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        working-directory: /app/
+        working-directory: app
         run: |
           docker build . -t 4568910/devops-assessment
           docker tag 4568910/devops-assessment:latest 4568910/devops-assessment:"v${GITHUB_RUN_NUMBER}"
