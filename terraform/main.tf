@@ -9,19 +9,19 @@ module "app-vm" {
 
   vm_map = {
     
-    # app = {
-    #   name           = "web"
-    #   location       = "eastus2"
-    #   size           = "Standard_B1s"
-    #   admin_username = "saitama"
-    #   nic = [ azurerm_network_interface.public.id ]
-    #   admin_ssh_key = {
-    #     username   = "saitama"
-    #     public_key = "~/.ssh/assessment.pub"
-    #   }
-    # },
+    app = {
+      name           = "web"
+      location       = "eastus2"
+      size           = "Standard_B1s"
+      admin_username = "saitama"
+      nic = [ azurerm_network_interface.public.id ]
+      admin_ssh_key = {
+        username   = "saitama"
+        public_key = "~/.ssh/assessment.pub"
+      }
+    },
 
-    mysql = {
+    postgres = {
       name           = "postgres"
       location       = "eastus2"
       size           = "Standard_B1s"
@@ -38,12 +38,12 @@ module "app-vm" {
 
 
 
-# resource "azurerm_public_ip" "this" {
-#   name                = "app-public-ip"
-#   resource_group_name = data.azurerm_resource_group.this.name
-#   location            = data.azurerm_resource_group.this.location
-#   allocation_method   = "Dynamic"
-# }
+resource "azurerm_public_ip" "this" {
+  name                = "app-public-ip"
+  resource_group_name = data.azurerm_resource_group.this.name
+  location            = data.azurerm_resource_group.this.location
+  allocation_method   = "Dynamic"
+}
 
 
 locals {
@@ -55,26 +55,26 @@ locals {
   }
 }
 
-# resource "azurerm_network_interface" "public" {
-#   name                = "public-nic"
-#   location            = var.location
-#   resource_group_name = data.azurerm_resource_group.this.name
+resource "azurerm_network_interface" "public" {
+  name                = "public-nic"
+  location            = var.location
+  resource_group_name = data.azurerm_resource_group.this.name
 
-#   ip_configuration {
-#     name                          = "internal"
-#     subnet_id                     = module.network.pub-subnets["${local.subnets.app}"]
-#     private_ip_address_allocation = "Dynamic"
-#   }
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = module.network.pub-subnets["${local.subnets.app}"]
+    private_ip_address_allocation = "Dynamic"
+  }
 
-#   ip_configuration {
-#     name                          = "public"
-#     subnet_id                     = module.network.pub-subnets["${local.subnets.app}"]
-#     private_ip_address_allocation = "Dynamic"
-#     public_ip_address_id          = azurerm_public_ip.this.id
-#     primary = true
-#   }
+  ip_configuration {
+    name                          = "public"
+    subnet_id                     = module.network.pub-subnets["${local.subnets.app}"]
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.this.id
+    primary = true
+  }
 
-# }
+}
 
 resource "azurerm_network_interface" "private" {
 
@@ -136,25 +136,25 @@ resource "azurerm_network_security_group" "this" {
 
 }
 
-# resource "azurerm_network_security_group" "bastion" {
-#   name                = "bastion-sg"
-#   location            = data.azurerm_resource_group.this.location
-#   resource_group_name = data.azurerm_resource_group.this.name
+resource "azurerm_network_security_group" "bastion" {
+  name                = "bastion-sg"
+  location            = data.azurerm_resource_group.this.location
+  resource_group_name = data.azurerm_resource_group.this.name
 
 
-#   security_rule {
-#     name                       = "Allow_All"
-#     priority                   = 1000
-#     direction                  = "Inbound"
-#     access                     = "Allow"
-#     protocol                   = "*"
-#     source_port_range          = "*"
-#     destination_port_range     = "22"
-#     source_address_prefix      = "*"
-#     destination_address_prefix = "*"
-#   }
+  security_rule {
+    name                       = "Allow_All"
+    priority                   = 1000
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
 
-# }
+}
 
 
 resource "azurerm_network_interface_security_group_association" "db" {
@@ -163,7 +163,7 @@ resource "azurerm_network_interface_security_group_association" "db" {
 }
 
 
-# resource "azurerm_subnet_network_security_group_association" "bastion" {
-#   subnet_id                 = module.network.pub-subnets["${local.subnets.app}"]
-#   network_security_group_id = azurerm_network_security_group.bastion.id
-# }
+resource "azurerm_subnet_network_security_group_association" "bastion" {
+  subnet_id                 = module.network.pub-subnets["${local.subnets.app}"]
+  network_security_group_id = azurerm_network_security_group.bastion.id
+}

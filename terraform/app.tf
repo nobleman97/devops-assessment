@@ -4,6 +4,8 @@ resource "azurerm_service_plan" "main" {
   location            = data.azurerm_resource_group.this.location
   os_type             = "Linux"
   sku_name            = "B2"
+
+  depends_on = [ module.app-vm.vms ]
 }
 
 resource "azurerm_linux_web_app" "main" {
@@ -26,6 +28,8 @@ resource "azurerm_linux_web_app" "main" {
   }
 
   virtual_network_subnet_id = module.network.sp-subnets["${local.subnets.sp-sub}"] 
+
+  depends_on = [ azurerm_service_plan.main ]
 }
 
 resource "azurerm_app_service_virtual_network_swift_connection" "vnet-integration" {

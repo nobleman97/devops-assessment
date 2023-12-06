@@ -6,6 +6,7 @@ variable "location" {
 }
 
 variable "docker_registry_password" {
+  sensitive = true
   type = string
   description = "Password to access your docker registry"
 }
