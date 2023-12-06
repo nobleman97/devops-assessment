@@ -35,11 +35,6 @@ jobs:
           terraform init
           terraform validate
 
-      - name: Terraform plan
-        run: terraform plan -var "connection_string=${{ secrets.DATABASE_URL }}" \
-          -var "docker_registry_password=${{ secrets.DOCKER_PASSWORD }}" \
-          -var "vm-pub-key=${{ secrets.VM_PUB_KEY }}"
-
       - name: Terraform destroy
         run: |
           terraform destroy --auto-approve -var "connection_string=${{ secrets.DATABASE_URL }}" \
