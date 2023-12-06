@@ -1,10 +1,10 @@
 name: CI workflow
 on:
-  workflow_dispatch:
+  workflow_dispatch
     
-  push:
-    branches:
-      - dev
+  # push:
+  #   branches:
+  #     - dev
 
 jobs:
   containerize:
