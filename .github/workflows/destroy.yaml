@@ -7,7 +7,7 @@ on:
   #     - dev
 
 jobs:
-  tf-plan:
+  tf-destroy:
     runs-on: ubuntu-latest
 
     env:
@@ -40,6 +40,6 @@ jobs:
 
       - name: Terraform destroy
         run: |
-          terraform destroy -var "connection_string=${{ secrets.DATABASE_URL }}" \
+          terraform destroy --auto-approve -var "connection_string=${{ secrets.DATABASE_URL }}" \
           -var "docker_registry_password=${{ secrets.DOCKER_PASSWORD }}" \
           -var "vm-pub-key=${{ secrets.VM_PUB_KEY }}"
