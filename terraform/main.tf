@@ -29,7 +29,7 @@ module "app-vm" {
 
 
 resource "azurerm_public_ip" "this" {
-  name                = "app-public-ip"
+  name                = "db-public-ip"
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location
   allocation_method   = "Dynamic"
@@ -72,7 +72,6 @@ resource "azurerm_network_interface" "public" {
     name                          = "public"
     subnet_id                     = module.network.priv-subnets["${local.subnets.db}"]
     private_ip_address_allocation = "Dynamic"
-    private_ip_address            = "10.0.2.5" 
     public_ip_address_id          = azurerm_public_ip.this.id
     primary                       = true
   }
