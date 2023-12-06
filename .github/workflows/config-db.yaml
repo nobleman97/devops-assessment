@@ -44,7 +44,7 @@ jobs:
       - name: configure ansible/var/main.yaml
     
         run: |
-          cat <<EOF > var/main.yaml
+          cat <<EOF > main.yaml
           postgresql_databases:
             - name: ${{ secrets.DB_NAME }}
               port: 5432
@@ -70,13 +70,15 @@ jobs:
               value: 'log'
             - option: listen_addresses
               value: '*'
+         
+          postgres_users_no_log: false
           EOF
 
-          postgres_users_no_log: false
+      - name: show the out put vars_files and move it
+        run: |
+          cat main.yaml
 
-      - name: show the out put vars_files
-        working-directory: var/
-        run: cat main.yaml
+          mv main.yaml ./var
 
 
       - name: Run ansible script
