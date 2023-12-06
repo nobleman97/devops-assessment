@@ -12,7 +12,6 @@ output "priv-subnets" {
   value = { for sub in azurerm_subnet.private :
     sub.name => sub.id
   }
-
 }
 
 output "sp-subnets" {

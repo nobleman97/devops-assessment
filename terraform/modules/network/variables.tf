@@ -57,7 +57,7 @@ variable "service_plan-subs" {
 
   default = {
     "subnet3_eastus2" = {
-      name = "app_service_subnet"
+      name = "subnet3_eastus2"
       location         = "eastus2"
       address_prefixes = [ "10.0.3.0/24" ]}
   }
