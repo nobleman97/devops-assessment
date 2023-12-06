@@ -2,9 +2,9 @@ name: assessment-pipe
 on:
   workflow_dispatch:
     
-  push:
-    branches:
-      - submission
+  # push:
+  #   branches:
+  #     - submission
 
 jobs:
   containerize:
