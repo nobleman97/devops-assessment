@@ -6,6 +6,7 @@ from dotenv import find_dotenv, load_dotenv
 from flask import Flask, jsonify, make_response, render_template, request, wrappers
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
 
 from helpers.version import get_project_version
 
@@ -54,7 +55,9 @@ def index() -> wrappers.Response:
         data['message'] = 'Database is not configured'
     else:
         try:
-            data['db_version'] = db.engine.execute('SELECT version();').fetchone()[0]
+            # data['db_version'] = db.engine.execute('SELECT version();').fetchone()[0]
+            result = db.session.execute(text('SELECT version();'))
+            data['db_version'] = result.fetchone()[0]
 
             user_ip = 'n/a'
             try:
@@ -84,6 +87,8 @@ def index() -> wrappers.Response:
         except Exception as ex:
             logger.exception(f'Query to DB failed: {ex}')
             data['message'] = 'Query to DB failed'
+        finally:
+            db.session.close() 
 
     return make_response(render_template('page.html', **data))
 

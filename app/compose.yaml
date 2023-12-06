@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: "postgres"
+    environment:
+      - POSTGRES_PASSWORD=davidson
+
+    networks:
+      - lab
+
+  wait-for-db:
+    image: alpine
+    depends_on:
+      - postgres
+    command: ["sh", "-c", "echo 'Waiting for database...' && sleep 10s"]
+    networks:
+      - lab
+    
+  app:
+    # build: .
+    image: "devops-assessment-app"
+    depends_on:
+      - wait-for-db
+    ports:
+      - "5000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:davidson@postgres:5432/postgres
+    networks:
+      - lab
+    
+
+networks:
+  lab:
+
