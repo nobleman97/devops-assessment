@@ -14,7 +14,7 @@ module "app-vm" {
       location       = "eastus2"
       size           = "Standard_B1s"
       admin_username = "saitama"
-      nic            = [azurerm_network_interface.postgres.id, azurerm_network_interface.public.id]
+      nic            = [azurerm_network_interface.postgres.id]
       admin_ssh_key = {
         username   = "saitama"
         public_key = "~/.ssh/assessment.pub"
@@ -58,24 +58,15 @@ resource "azurerm_network_interface" "postgres" {
   
   }
 
-}
-
-
-resource "azurerm_network_interface" "public" {
-  name                = "public-nic"
-  location            = var.location
-  resource_group_name = data.azurerm_resource_group.this.name
-
-
   ip_configuration {
     name                          = "public"
-    subnet_id                     = module.network.pub-subnets["${local.subnets.app}"]
+    subnet_id                     = module.network.priv-subnets["${local.subnets.db}"]
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.this.id
     primary                       = true
   }
-
 }
+
 
 
 resource "azurerm_network_security_group" "this" {
