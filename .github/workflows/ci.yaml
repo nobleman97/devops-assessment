@@ -2,9 +2,9 @@ name: CI workflow
 on:
   workflow_dispatch:
     
-  push:
-    branches:
-      - dev
+  # push:
+  #   branches:
+  #     - dev
 
 jobs:
   containerize:
@@ -24,7 +24,7 @@ jobs:
         working-directory: app
         run: |
           docker build . -t 4568910/devops-assessment:latest
-          docker tag 4568910/devops-assessment:latest docker tag 4568910/devops-assessment:latest-2
+          docker tag 4568910/devops-assessment:latest 4568910/devops-assessment:latest-2
 
           docker pull 4568910/devops-assessment:latest
           docker tag 4568910/devops-assessment:latest 4568910/devops-assessment:"v${GITHUB_RUN_NUMBER - 1}"
