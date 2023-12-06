@@ -14,7 +14,7 @@ module "app-vm" {
       location       = "eastus2"
       size           = "Standard_B1s"
       admin_username = "saitama"
-      nic            = [azurerm_network_interface.postgres.id, azurerm_network_interface.private.id]
+      nic            = [azurerm_network_interface.postgres.id]
       admin_ssh_key = {
         username   = "saitama"
         public_key = "~/.ssh/assessment.pub"
