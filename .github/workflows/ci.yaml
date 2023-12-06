@@ -1,6 +1,11 @@
 name: CI workflow
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      versionNumber:
+        description: "Takes a version number"
+        type: string
+
     
   # push:
   #   branches:
