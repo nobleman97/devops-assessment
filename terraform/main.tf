@@ -8,7 +8,7 @@ module "app-vm" {
   source = "./modules/machines"
 
   vm_map = {
-    
+
     # app = {
     #   name           = "web"
     #   location       = "eastus2"
@@ -26,7 +26,7 @@ module "app-vm" {
       location       = "eastus2"
       size           = "Standard_B1s"
       admin_username = "saitama"
-      nic = [ azurerm_network_interface.postgres.id  ]
+      nic            = [azurerm_network_interface.postgres.id]
       admin_ssh_key = {
         username   = "saitama"
         public_key = "~/.ssh/assessment.pub"
@@ -53,8 +53,8 @@ resource "azurerm_public_ip" "this" {
 locals {
 
   subnets = {
-    app = "subnet1_eastus2"
-    db = "subnet2_eastus2"
+    app    = "subnet1_eastus2"
+    db     = "subnet2_eastus2"
     sp-sub = "subnet3_eastus2"
   }
 }
@@ -67,7 +67,9 @@ resource "azurerm_network_interface" "postgres" {
   ip_configuration {
     name                          = "internal"
     subnet_id                     = module.network.priv-subnets["${local.subnets.db}"]
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
+    private_ip_address            = "10.0.2.4"
+
   }
 
   ip_configuration {
@@ -75,7 +77,7 @@ resource "azurerm_network_interface" "postgres" {
     subnet_id                     = module.network.priv-subnets["${local.subnets.db}"]
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.this.id
-    primary = true
+    primary                       = true
   }
 
 }
