@@ -5,7 +5,7 @@ on:
   
   push:
     branches:
-      - submsission
+      - master
 
 jobs:
   tf-plan:
