@@ -22,11 +22,11 @@ jobs:
         working-directory: app
         run: |
           docker build . -t 4568910/devops-assessment
-          docker tag 4568910/devops-assessment:latest 4568910/devops-assessment:"v${GITHUB_RUN_NUMBER}"
+          # docker tag 4568910/devops-assessment:latest 4568910/devops-assessment:"v${GITHUB_RUN_NUMBER}"
 
       
 
       - name: Push Docker image
-        run: docker push 4568910/devops-assessment:"v${GITHUB_RUN_NUMBER}"
+        run: docker push 4568910/devops-assessment:latest
 
       
