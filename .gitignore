@@ -141,3 +141,4 @@ dmypy.json
 
 /ansible/vars/*
 credentials.json
+terraform/plan
