@@ -77,6 +77,7 @@ resource "azurerm_network_interface" "private" {
     subnet_id                     = module.network.priv-subnets["${local.subnets.db}"]
     private_ip_address_allocation = "Static"
     private_ip_address            = "10.0.2.4"
+    primary = false
   }
 
 }
