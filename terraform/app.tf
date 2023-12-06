@@ -32,8 +32,8 @@ resource "azurerm_linux_web_app" "main" {
   depends_on = [ azurerm_service_plan.main ]
 }
 
-resource "azurerm_app_service_virtual_network_swift_connection" "vnet-integration" {
-  subnet_id = module.network.sp-subnets["${local.subnets.sp-sub}"] # local is in main.tf
-  app_service_id = azurerm_linux_web_app.main.id
+# resource "azurerm_app_service_virtual_network_swift_connection" "vnet-integration" {
+#   subnet_id = module.network.sp-subnets["${local.subnets.sp-sub}"] # local is in main.tf
+#   app_service_id = azurerm_linux_web_app.main.id
 
-}
+# }
