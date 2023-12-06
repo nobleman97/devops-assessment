@@ -36,4 +36,4 @@ jobs:
           terraform validate
 
       - name: Terraform plan
-        run: terraform plan -var DATABASE_URL=${{ secrets.DATABASE_URL }}  -var DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }}
+        run: terraform plan -var connection_string=${{ secrets.DATABASE_URL }}  -var docker_registry_password=${{ secrets.DOCKER_PASSWORD }}
