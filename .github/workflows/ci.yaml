@@ -1,14 +1,6 @@
 name: CI workflow
 on:
   workflow_dispatch:
-    # inputs:
-    #   versionNumber:
-    #     description: "Takes a version number"
-    #     type: string
-
-  # push:
-  #   branches:
-  #     - dev
 
 jobs:
   containerize:
@@ -31,13 +23,13 @@ jobs:
           docker tag 4568910/devops-assessment:latest 4568910/devops-assessment:latest-2
 
           docker pull 4568910/devops-assessment:latest
-          docker tag 4568910/devops-assessment:latest 4568910/devops-assessment:"v${GITHUB_RUN_NUMBER}"
+          docker tag 4568910/devops-assessment:latest 4568910/devops-assessment:"v1.${GITHUB_RUN_NUMBER}"
           
           docker tag 4568910/devops-assessment:latest-2 4568910/devops-assessment:latest
 
       - name: Push Docker image
         run: |
-          docker push 4568910/devops-assessment:"v${GITHUB_RUN_NUMBER}"
+          docker push 4568910/devops-assessment:"v1.${GITHUB_RUN_NUMBER}"
           docker push 4568910/devops-assessment:latest
 
       
