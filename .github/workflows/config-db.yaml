@@ -80,6 +80,10 @@ jobs:
 
           mv main.yaml ./var
 
+          cd var && pwd && cat main.yaml
+          
+
+
 
       - name: Run ansible script
         shell: bash 
