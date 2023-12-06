@@ -45,7 +45,7 @@ jobs:
       - name: Run ansible script
         shell: bash 
         run: |
-          ansible-playbook --private-key /home/runner/.ssh/id_rsa -u ${{secrets.ANSIBLE_DEPLOY_USER}} -u saitama db.yaml
+          ansible-playbook --private-key /home/runner/.ssh/id_rsa -u saitama db.yaml
 
 
           
