@@ -1,10 +1,14 @@
-name: assessment-pipe
+name: CI workflow
 on:
   workflow_dispatch:
-    
+    # inputs:
+    #   versionNumber:
+    #     description: "Takes a version number"
+    #     type: string
+
   # push:
   #   branches:
-  #     - submission
+  #     - dev
 
 jobs:
   containerize:
@@ -20,15 +24,20 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker image
+      - name: Build Docker image and save a previous version
         working-directory: app
         run: |
-          docker build . -t 4568910/devops-assessment
-          # docker tag 4568910/devops-assessment:latest 4568910/devops-assessment:"v${GITHUB_RUN_NUMBER}"
+          docker build . -t 4568910/devops-assessment:latest
+          docker tag 4568910/devops-assessment:latest 4568910/devops-assessment:latest-2
 
-      
+          docker pull 4568910/devops-assessment:latest
+          docker tag 4568910/devops-assessment:latest 4568910/devops-assessment:"v${GITHUB_RUN_NUMBER}"
+          
+          docker tag 4568910/devops-assessment:latest-2 4568910/devops-assessment:latest
 
       - name: Push Docker image
-        run: docker push 4568910/devops-assessment:latest
+        run: |
+          docker push 4568910/devops-assessment:"v${GITHUB_RUN_NUMBER}"
+          docker push 4568910/devops-assessment:latest
 
       

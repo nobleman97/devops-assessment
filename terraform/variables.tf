@@ -16,3 +16,8 @@ variable "connection_string" {
   type = string
   description = "connection string to allow app speak with server"
 }
+
+variable "vm-pub-key" {
+  description = "Public key with which we can access our VMs"
+  type = string
+}

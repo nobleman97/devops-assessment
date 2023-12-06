@@ -11,7 +11,7 @@ resource "azurerm_linux_virtual_machine" "this" {
 
   admin_ssh_key {
     username   = each.value.admin_ssh_key.username
-    public_key = file(each.value.admin_ssh_key.public_key)
+    public_key = var.pub-key
   }
 
   os_disk {

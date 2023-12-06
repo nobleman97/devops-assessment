@@ -37,6 +37,7 @@ variable "vm_map" {
   }
 }
 
-# variable "nic" {
-#   type = list(string)
-# }
+variable "pub-key" {
+  type = string
+  description = "Public key string to access vms"
+}
