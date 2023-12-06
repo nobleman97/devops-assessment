@@ -39,4 +39,4 @@ jobs:
         run: |
           terraform plan -var connection_string=${{ secrets.DATABASE_URL }} \
           -var docker_registry_password=${{ secrets.DOCKER_PASSWORD }} \
-          -var vm-pub-key=${{ sercrets.VM_PUB_KEY }}
+          -var vm-pub-key=${{ secrets.VM_PUB_KEY }}
