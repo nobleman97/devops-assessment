@@ -1,15 +1,14 @@
 name: CI workflow
 on:
   workflow_dispatch:
-    inputs:
-      versionNumber:
-        description: "Takes a version number"
-        type: string
+    # inputs:
+    #   versionNumber:
+    #     description: "Takes a version number"
+    #     type: string
 
-    
-  push:
-    branches:
-      - dev
+  # push:
+  #   branches:
+  #     - dev
 
 jobs:
   containerize:
