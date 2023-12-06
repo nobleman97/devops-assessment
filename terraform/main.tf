@@ -55,6 +55,8 @@ resource "azurerm_network_interface" "postgres" {
     subnet_id                     = module.network.priv-subnets["${local.subnets.db}"]
     private_ip_address_allocation = "Static"
     private_ip_address = "10.0.2.4"
+    primary                       = true
+
   }
 
   ip_configuration {
@@ -63,7 +65,7 @@ resource "azurerm_network_interface" "postgres" {
     private_ip_address_allocation = "Dynamic"
     private_ip_address            = "10.0.2.5" 
     public_ip_address_id          = azurerm_public_ip.this.id
-    primary                       = true
+    primary                       = false
   }
 
 }
