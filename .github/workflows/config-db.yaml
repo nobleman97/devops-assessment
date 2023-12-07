@@ -78,7 +78,7 @@ jobs:
       - name: show the out put vars_files and move it
         run: |
           cat main.yaml
-          mkdir var
+          mkdir vars
 
           mv main.yaml ./vars
 
