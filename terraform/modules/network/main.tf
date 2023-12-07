@@ -8,15 +8,15 @@ resource "azurerm_virtual_network" "this" {
 }
 
 
-resource "azurerm_subnet" "public" {
-  for_each = tomap(var.pub-subnets)
+# resource "azurerm_subnet" "public" {
+#   for_each = tomap(var.pub-subnets)
 
-  name                = each.value.name
-  resource_group_name = data.azurerm_resource_group.this.name
+#   name                = each.value.name
+#   resource_group_name = data.azurerm_resource_group.this.name
 
-  virtual_network_name = azurerm_virtual_network.this[each.value.location].name
-  address_prefixes     = each.value.address_prefixes
-}
+#   virtual_network_name = azurerm_virtual_network.this[each.value.location].name
+#   address_prefixes     = each.value.address_prefixes
+# }
 
 
 resource "azurerm_subnet" "private" {

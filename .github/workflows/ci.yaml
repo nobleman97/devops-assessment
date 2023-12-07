@@ -16,6 +16,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: update build number
+        working-directory: app
+        run: |
+          echo "v1.${GITHUB_RUN_NUMBER}" > version.txt
+
       - name: Build Docker image and save a previous version
         working-directory: app
         run: |
@@ -31,5 +36,8 @@ jobs:
         run: |
           docker push 4568910/devops-assessment:"v1.${GITHUB_RUN_NUMBER}"
           docker push 4568910/devops-assessment:latest
+
+
+          
 
       
