@@ -62,7 +62,7 @@ In order to start the application just follow the following steps
    Clone the repo, cd into /app directory and run ```docker compose up```
 
  - On Cloud: <br/>
-   I have prepared a couple of workflows. First, I'll run the `CI workflow`, next I'll run the `Terraform Apply` workflow, and finally I'll run the `Configure Database` workflow whilw passing in the ip address of the DB server. Finally I'll remove the public ip from the database server (for security reasons). This should have everything up and running.
+   I have prepared a couple of workflows. First, I'll run the `CI workflow`, next I'll run the `Terraform Apply` workflow, and finally I'll run the `Configure Database` workflow whilw passing in the ip address of the DB server. Finally I'll remove the public ip from the database server (for security reasons). This should have everything up and running. Then I could run the `Terraform destroy` pipeline to destroy the infrastructure. 
 
 
 
