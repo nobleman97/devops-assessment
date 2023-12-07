@@ -5,7 +5,6 @@ resource "azurerm_service_plan" "main" {
   os_type             = "Linux"
   sku_name            = "B2"
 
-  depends_on = [module.app-vm.vms]
 }
 
 resource "azurerm_linux_web_app" "main" {
