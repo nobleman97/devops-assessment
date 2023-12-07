@@ -139,6 +139,6 @@ dmypy.json
 */terraform/plan
 *.tfvars
 
-/ansible/vars/other.yaml
+/ansible/vars/*
 credentials.json
 terraform/plan

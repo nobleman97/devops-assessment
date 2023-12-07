@@ -41,48 +41,48 @@ jobs:
           ${{ inputs.db-ip }}
           EOF
 
-      # - name: configure ansible/var/main.yaml
+      - name: configure ansible/var/main.yaml
     
-      #   run: |
-      #     cat <<EOF > main.yaml
-      #     postgresql_databases:
-      #       - name: ${{ secrets.DB_NAME }}
-      #         port: 5432
+        run: |
+          cat <<EOF > main.yaml
+          postgresql_databases:
+            - name: ${{ secrets.DB_NAME }}
+              port: 5432
 
-      #     postgresql_users:
-      #       - name: ${{ secrets.ANSIBLE_DEPLOY_USER }}
-      #         password: ${{ secrets.DB_PWD }}
+          postgresql_users:
+            - name: ${{ secrets.ANSIBLE_DEPLOY_USER }}
+              password: ${{ secrets.DB_PWD }}
 
 
-      #     postgresql_hba_entries:
-      #       - {type: local, database: all, user: postgres, auth_method: peer}
-      #       - {type: local, database: all, user: all, auth_method: peer}
-      #       - {type: host, database: all, user: all, address: '0.0.0.0/0', auth_method: "md5"}
-      #       - {type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: "{{ postgresql_auth_method }}"}
-      #       - {type: host, database: all, user: all, address: '::1/128', auth_method: "{{ postgresql_auth_method }}"}
+          postgresql_hba_entries:
+            - {type: local, database: all, user: postgres, auth_method: peer}
+            - {type: local, database: all, user: all, auth_method: peer}
+            - {type: host, database: all, user: all, address: '0.0.0.0/0', auth_method: "md5"}
+            - {type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: "{{ postgresql_auth_method }}"}
+            - {type: host, database: all, user: all, address: '::1/128', auth_method: "{{ postgresql_auth_method }}"}
             
 
 
-      #     # Global configuration options that will be set in postgresql.conf.
-      #     postgresql_global_config_options:
-      #       - option: unix_socket_directories
-      #         value: '{{ postgresql_unix_socket_directories | join(",") }}'
-      #       - option: log_directory
-      #         value: 'log'
-      #       - option: listen_addresses
-      #         value: '*'
+          # Global configuration options that will be set in postgresql.conf.
+          postgresql_global_config_options:
+            - option: unix_socket_directories
+              value: '{{ postgresql_unix_socket_directories | join(",") }}'
+            - option: log_directory
+              value: 'log'
+            - option: listen_addresses
+              value: '*'
          
-      #     postgres_users_no_log: false
-      #     EOF
+          postgres_users_no_log: false
+          EOF
 
       - name: show the out put vars_files and move it
         run: |
-          # cat main.yaml
-          # mkdir var
+          cat main.yaml
+          mkdir var
 
-          # mv main.yaml ./var
+          mv main.yaml ./vars
 
-          cd var && pwd && cat main.yaml
+          cd vars && pwd && cat main.yaml
           
 
 
