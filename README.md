@@ -68,7 +68,7 @@ In order to start the application just follow the following steps
 
 ## Questions?
 
-If you still have some questions about this task, feel free to [ask me](mailto:davidstone097@gmail.com).
+If you still have some questions about this task, feel free to shoot me an mail at `davidstone097@gmail.com`
 
 # License
 
