@@ -1,45 +1,25 @@
-# Application
+# DevOps Assessment
 
-All files you need - are in this GitHub repository. Just clone it.
+The DevOps Assessment project is a simple web application which counts the number of times a unique visitor visits the application. In this exercise, I was required to deploy this application to any service of choice, while employing DevOps practices and utilizing the power of the cloud.
 
-This app was written in Python, and it is pretty simple. 
-Why Python? In my own opinion, this is one of the languages that any Linux engineer should know. 
-But this task is not about programming, so if you don't know Python and are skilled in Bash - It's ok.
+This documentation will walk you through the various parts of the project.
+
+## Architecture diagram
+<p text-align=center>
+<img src=./.assets/architecture.png width=90% >
+</p>
+
+This is a simple web application, so it was deployed on Azure App Service and connected to a Postgresql database running in a secure virtual machine.
 
 Requirements:
 
-- Python `3.6` (any other `3.x` should work too)
-- PostgreSQL or MySQL server
-- Packages listed in `requirements.txt` 
+- Azure Cli
+- Terraform
+- GitHub Actions
+- Ansible
 
-All this App does - counts unique visitors and shows this statistic. All it needs is a running database. 
 
-So, this app has some endpoints:
 
-- `/` - main page with all data shown
-- `/version` - JSON response with the current app version
-
-## Files description
-
-- `migrations` - directory with database migrations (see _Installation_) based on `alembic`
-- `static` - just static files for serving UI
-- `templates` - HTML template for the main page
-- `app.py` - main "executable" which contains all the code
-- `requirements.txt` - list of all Python packages needed to run the app
-- `requirements.test.txt` - list of all Python packages needed for CI/CD tasks
-- `version.txt` - text file with the current version
-
-## Installation
-
-To install the application, several steps should be completed:
-
-- Prepare PostgreSQL database
-- Install all required packages with `pip install -r requirements.txt`
-- Set all required environment variables
-- Apply all migrations with `flask db upgrade`
-- Start application
-
-For the last step, you can use different approaches - just choose one from [official docs][flask-deploy].
 
 ## Configuration
 
@@ -51,101 +31,44 @@ As for any Docker-ready application - It can be easily configured via environmen
 
 # Task
 
-So, now we can talk about the goals. 
-I'm writing just a roadmap, and any step is optional but will give additional points if is done correctly.
-If you are good in docs - spend more time on writing good documentation, 
-if you have good experience in clouds - write a scalable, fault-tolerant, and cloud-ready solution.
-Feel free to choose your way and show your best.
-
-An ideal solution should be fulfilled as a git repository, which will contain all Infrastructure-related code ([IaC]), scenarios, diagrams, and documentation as a main `README.md` file. 
 
 ## Infrastructure
 
-I think the best option for this is [Terraform]. But you can also use [Ansible] or [Chef], or any tool you want. 
-It will be great if your solution can be used from the box to start the whole stack on a cloud provider (AWS, GCP, Azure, AlibabaCloud, etc.).
-
-- Start all related servers/instances/logical units
-- Make required changes in OS
-- Install Docker (or any other kind of containerization software)
+`Terraform` was used to provision all the aspects of the cloud infastructure and **`Ansible`** was then used to configure the Postgresql server and database.
 
 ## Containerisation
 
-`Dockerfile` - should be included, but it isn't, because the developer of the app was too lazy for this task... 
-So, it will be the first step to build a container with this app - writing `Dockerfile` and making the first `docker build`.
+A `Dockerfile` was write for the application and the build image was pushed to DockerHub using a GitHub Action Workflow.
 
-- Choose right base image
-- Include all installation steps
-- Make this app run and listen on an HTTP interface
-- Prepare `docker-compose.yml` for the whole app stack, which can be used by developers
+I also prepared a Docker-compose file to use for local testing. You can take a look [here](./app/compose.yaml).
 
-## Analysis 
 
-All tools you need for this section are in the `requirements.test.txt` file,
-which can be easily used with `pip install -r requirements.test.txt`.
-
-- Lintering
-    - Code style<br/>
-        Just use [flake8] and configuration from `setup.cfg`
-    - Static typing<br/>
-        This project can be verified with [mypy] static types checker, configuration for it can be found in `setup.cfg`
-- Tests<br/>
-    There are not so many tests, but you can run them with `pytest .` and get successful results
-- Code coverage<br/>
-    Checkout Python [Coverage] project, 
-    or, you can get integration with [CodeCov] or [Coveralls] - they are free for open-source repositories.   
 
 ## CI/CD
 
-At this stage you already have a project, that can be built and verified for some kind of issues. 
-It's time to automate it.
+I chose to use GitHub Actions for CI/CD workflows. It was my first time using it. It think it was efficient because compared with similar tools, it is flexible and robust.
 
-Choose one of the CI/CD systems you like:
-
-- GitLab<br/>
-    All you need - `.gitlab-ci.yml` file as described [here][gitlab-ci-yml].
-- BitBucket<br/>
-    You can also pass this stage using [BitBucket Pipelines][bitbucket-pipelines].
-    Just implement a build step and deployment logic somewhere, from AWS to K8s.
-- Jenkins<br/>
-    The most complex but also more powerful than others. 
-    If you choose it - you need to write a working `Jenkinsfile` to achieve the goal.
-    I recommend using a scripted, not declarative pipeline - it would be much better to show your experience.
-    Documentation about Jenkins Pipelines is avaiable [here][jenkins-pipelines].
-
-And of course, don't forget about:
 
 - Database Migrations<br/>
-    The application should execute DB migrations (as described above) on each deployment to update the schema for new code.
+    Upon deployment, the application runs DB migrations as expected
 - Versioning<br/>
     The current project version can be seen in the file `version.txt` and it will be shown as the version on a web page.
-    What about adding a build number to this version and auto-increment it on each build?
+    What about adding a build number to this version and auto-increment it on each build? ....Done!
     
-## Monitoring
 
-Just prepare some examples, of how this app could be monitored. 
-Docker Healthchecks or rules on AWS Route53 - anything will be accepted as a solution.
+## Starting the Application
+In order to start the application just follow the following steps
+ - Locally: <br/>
+   Clone the repo, cd into /app directory and run ```docker compose up```
 
-## Documentation
+ - On Cloud: <br/>
+   I have prepared a couple of workflows. First, I'll run the `CI workflow`, next I'll run the `Terraform Apply` workflow, and finally I'll run the `Configure Database` workflow whilw passing in the ip address of the DB server. Finally I'll remove the public ip from the database server (for security reasons). This should have everything up and running. Then I could run the `Terraform destroy` pipeline to destroy the infrastructure. 
 
-Documentation should include key points such as:
 
-- What technologies were used and what tools are needed to use your solution?
-- How to start this service from scratch using your solution?
 
-Also, you may write additional docs like:
+## Questions?
 
-- How to scale the count of servers to take more load?
-- What is the application deployment architecture diagram?
-
-To draw diagrams you can use [Draw.io][drawio], [CloudCraft] or even [ASCII Art][asciiflow]. Include them in your repository too.
-
-## Fixes?
-
-There are some problems with app architecture. If you have a solution - it will be great!
-
-# Questions?
-
-If you still have some questions about this task, feel free to [ask me](https://soar.name/contact/).
+If you still have some questions about this task, feel free to shoot me an mail at `davidstone097@gmail.com`
 
 # License
 

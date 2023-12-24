@@ -16,21 +16,21 @@ variable "vnets" {
   }
 }
 
-variable "pub-subnets" {
-  description = "A map of objects holding configuration details for subnets"
-  type = map(object({
-    name             = string
-    location         = string
-    address_prefixes = list(string)
-  }))
-  default = {
-    "subnet1_eastus2" = {
-      name             = "subnet1_eastus2"
-      location         = "eastus2"
-      address_prefixes = ["10.0.1.0/24"]
-    }
-  }
-}
+# variable "pub-subnets" {
+#   description = "A map of objects holding configuration details for subnets"
+#   type = map(object({
+#     name             = string
+#     location         = string
+#     address_prefixes = list(string)
+#   }))
+#   default = {
+#     "subnet1_eastus2" = {
+#       name             = "subnet1_eastus2"
+#       location         = "eastus2"
+#       address_prefixes = ["10.0.1.0/24"]
+#     }
+#   }
+# }
 
 variable "priv-subnets" {
   description = "A map of objects holding configuration details for subnets"

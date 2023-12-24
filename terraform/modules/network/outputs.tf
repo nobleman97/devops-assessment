@@ -1,10 +1,10 @@
-output "pub-subnets" {
-  description = "Output used to pass subnet ids which was used to call machine module"
-  value = { for sub in azurerm_subnet.public :
-    sub.name => sub.id 
-  }
+# output "pub-subnets" {
+#   description = "Output used to pass subnet ids which was used to call machine module"
+#   value = { for sub in azurerm_subnet.public :
+#     sub.name => sub.id 
+#   }
 
-}
+# }
 
 
 output "priv-subnets" {
