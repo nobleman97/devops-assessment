@@ -1,6 +1,6 @@
-# DevOps Assessment
+# Deployment of Ryzen
 
-The DevOps Assessment project is a simple web application which counts the number of times a unique visitor visits the application. In this exercise, I was required to deploy this application to any service of choice, while employing DevOps practices and utilizing the power of the cloud.
+Ryzen is a simple 2-tier is a simple web application which counts the number of times a unique visitor visits the application. In this exercise, I deployed Ryzen in an Azure Web App instance an configured a MySQL server using Ansible.
 
 This documentation will walk you through the various parts of the project.
 
